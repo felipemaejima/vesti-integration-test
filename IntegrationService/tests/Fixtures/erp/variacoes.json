@@ -1,0 +1,34 @@
+[
+  {
+    "sku": "100_P_AZUL",
+    "size": "P",
+    "color": "AZUL",
+    "quantity": 10,
+    "unit_measurement": "UN",
+    "ordering": 2
+  },
+  {
+    "sku": "100_M_AZUL",
+    "size": "M",
+    "color": "AZUL",
+    "quantity": 5,
+    "unit_measurement": "UN",
+    "ordering": 1
+  },
+  {
+    "sku": "100_P_BRANCO",
+    "size": "P",
+    "color": "BRANCO",
+    "quantity": 7,
+    "unit_measurement": "UN",
+    "ordering": 3
+  },
+  {
+    "sku": "200_40_PRETA",
+    "size": 40,
+    "color": "PRETA",
+    "quantity": 3,
+    "unit_measurement": "UN",
+    "ordering": 1
+  }
+]

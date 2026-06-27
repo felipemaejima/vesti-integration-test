@@ -11,90 +11,89 @@ use RuntimeException;
 
 final class XptoErpProvider implements ErpProviderInterface
 {
-  public function __construct(
-    private readonly XptoErpResponseMapper $mapper,
-  ) {
-  }
+    public function __construct(
+        private readonly XptoErpResponseMapper $mapper,
+    ) {}
 
-  /**
-   * @return list<ProductDTO>
-   */
-  public function getProducts(): iterable
-  {
-    $sourcePath = $this->sourcePath();
+    /**
+     * @return list<ProductDTO>
+     */
+    public function getProducts(): iterable
+    {
+        $sourcePath = $this->sourcePath();
 
-    Log::info('Xpto ERP read started.', ['source_path' => $sourcePath]);
+        Log::info('Leitura do ERP Xpto iniciada.', ['source_path' => $sourcePath]);
 
-    $products = $this->readJson($sourcePath . '/produtos.json');
-    $variations = $this->readJson($sourcePath . '/variacoes.json');
+        $products = $this->readJson($sourcePath.'/produtos.json');
+        $variations = $this->readJson($sourcePath.'/variacoes.json');
 
-    Log::info('Xpto ERP raw data loaded.', [
-      'products' => count($products),
-      'variations' => count($variations),
-    ]);
+        Log::info('Dados brutos do ERP Xpto carregados.', [
+            'products' => count($products),
+            'variations' => count($variations),
+        ]);
 
-    $variationsByCode = $this->indexVariationsByCode($variations);
-    unset($variations);
+        $variationsByCode = $this->indexVariationsByCode($variations);
+        unset($variations);
 
-    $productDTOs = [];
+        $productDTOs = [];
 
-    foreach ($products as $product) {
-      $code = (string) $product['code'];
+        foreach ($products as $product) {
+            $code = (string) $product['code'];
 
-      $productDTOs[] = $this->mapper->toProductDTO(
-        $product,
-        $variationsByCode[$code] ?? [],
-      );
+            $productDTOs[] = $this->mapper->toProductDTO(
+                $product,
+                $variationsByCode[$code] ?? [],
+            );
+        }
+
+        Log::info('Leitura do ERP Xpto finalizada.', ['products_normalized' => \count($productDTOs)]);
+
+        return $productDTOs;
     }
 
-    Log::info('Xpto ERP read finished.', ['products_normalized' => count($productDTOs)]);
+    private function indexVariationsByCode(array $variations): array
+    {
+        $index = [];
 
-    return $productDTOs;
-  }
+        foreach ($variations as $variation) {
+            $sku = (string) $variation['sku'];
+            $separatorPosition = strpos($sku, '_');
 
-  private function indexVariationsByCode(array $variations): array
-  {
-    $index = [];
+            $code = $separatorPosition === false
+              ? $sku
+              : substr($sku, 0, $separatorPosition);
 
-    foreach ($variations as $variation) {
-      $sku = (string) $variation['sku'];
-      $separatorPosition = strpos($sku, '_');
+            $index[$code][] = $variation;
+        }
 
-      $code = $separatorPosition === false
-        ? $sku
-        : substr($sku, 0, $separatorPosition);
-
-      $index[$code][] = $variation;
+        return $index;
     }
 
-    return $index;
-  }
+    private function readJson(string $path): array
+    {
+        if (! is_file($path)) {
+            throw new RuntimeException("Arquivo de origem do ERP Xpto não encontrado: {$path}");
+        }
 
-  private function readJson(string $path): array
-  {
-    if (!is_file($path)) {
-      throw new RuntimeException("Xpto ERP source file not found: {$path}");
+        $contents = file_get_contents($path);
+
+        if ($contents === false) {
+            throw new RuntimeException("Não foi possível ler o arquivo de origem do ERP Xpto: {$path}");
+        }
+
+        $decoded = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
+
+        return $decoded;
     }
 
-    $contents = file_get_contents($path);
+    private function sourcePath(): string
+    {
+        $configured = config('integration.erp.xpto.source_path');
 
-    if ($contents === false) {
-      throw new RuntimeException("Unable to read Xpto ERP source file: {$path}");
+        if (is_string($configured) && $configured !== '') {
+            return rtrim($configured, '/');
+        }
+
+        return base_path('../erpXpto');
     }
-
-    $decoded = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
-
-    return $decoded;
-  }
-
-  private function sourcePath(): string
-  {
-    $configured = config('integration.erp.xpto.source_path');
-
-    if (is_string($configured) && $configured !== '') {
-      return rtrim($configured, '/');
-    }
-
-    return base_path('../erpXpto');
-  }
 }

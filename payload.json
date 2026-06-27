@@ -1,0 +1,102 @@
+{
+    "products": [
+        {
+            "integration_id": "123",
+            "code": "123",
+            "name": "Produto teste",
+            "active": true,
+            "description": "Produto X",
+            "full_description": "",
+            "composition": "100% algodão",
+            "brand": "Marca 01",
+            "release_at": "2025-10-15 10:30:00",
+            "price": 120.5,
+            "promotion": true,
+            "price_promotional": 115.8,
+            "weight": 400,
+            "height": 10,
+            "width": 20,
+            "length": 30,
+            "location": "Pratileira",
+            "categories": [
+                "0001_1_1",
+                "0002_2"
+            ],
+            "order_colors": [
+                {
+                    "color": "BRANCO",
+                    "order": 2
+                },
+                {
+                    "color": "AZUL",
+                    "order": 1
+                }
+            ],
+            "variations": [
+                {
+                    "sku": "123_P_BRANCO",
+                    "size": "P",
+                    "color": "BRANCO",
+                    "color_code": "#FFFFFF",
+                    "color_integration_id": "123_BRANCO",
+                    "quantity": 10,
+                    "order": 1,
+                    "unit_type": "PÇ",
+                    "barcode": "7891000000019"
+                },
+                {
+                    "sku": "123_M_BRANCO",
+                    "size": "M",
+                    "color": "BRANCO",
+                    "color_code": "#FFFFFF",
+                    "color_integration_id": "123_BRANCO",
+                    "quantity": 10,
+                    "order": 2,
+                    "unit_type": "PÇ",
+                    "barcode": "7891000000026"
+                },
+                {
+                    "sku": "123_G_BRANCO",
+                    "size": "G",
+                    "color": "BRANCO",
+                    "color_code": "#FFFFFF",
+                    "color_integration_id": "123_BRANCO",
+                    "quantity": 10,
+                    "order": 3,
+                    "unit_type": "PÇ",
+                    "barcode": "7891000000033"
+                },
+                {
+                    "sku": "123_P_AZUL",
+                    "size": "P",
+                    "color": "AZUL",
+                    "color_code": "#0F31F2",
+                    "quantity": 10,
+                    "order": 1,
+                    "unit_type": "PÇ",
+                    "barcode": "7891000000040"
+                },
+                {
+                    "sku": "123_M_AZUL",
+                    "size": "M",
+                    "color": "AZUL",
+                    "color_code": "#0F31F2",
+                    "quantity": 10,
+                    "order": 2,
+                    "unit_type": "PÇ",
+                    "barcode": "7891000000057"
+                },
+                {
+                    "sku": "123_G_AZUL",
+                    "size": "G",
+                    "color": "AZUL",
+                    "color_code": "#0F31F2",
+                    "quantity": 10,
+                    "order": 3,
+                    "unit_type": "PÇ",
+                    "barcode": "7891000000064"
+                }
+            ]
+        }
+    ]
+}

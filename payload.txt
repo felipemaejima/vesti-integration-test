@@ -1,3 +1,8 @@
+curl --request POST \
+ --url https://{apiurl}/v1/products/company/{company_id} \
+ --header 'apikey: {token}' \
+ --header 'Content-Type: application/json' \
+ --data
 {
     "products": [
         {

@@ -1,0 +1,16 @@
+- Ao cadastrar uma categoria com três níveis,
+     se colocar o integration_id do último nível,
+     o produto terá todas os níveis de categoria.
+- Caso queira que o produto esteja em mais de uma categoria
+     (ex: Masculino e Promoção), dentro do array adcionar os
+     integration_id separando-os por vírgula.
+
+{
+    "result": {
+        "success": true,
+        "message": "Ok",
+        "messages": ""
+    },
+    "statusCode": 200
+}
+

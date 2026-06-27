@@ -13,9 +13,9 @@
 # Definições técnicas iniciais
 
  - Solid 
- - Arquitetura Modular
+ - Arquitetura Modular (pasta serviceName -> Implementação)
  - Specs
- - Serviço de consumo de ERP depender de abstração - ERPService implementa ERPInterface
+ - Serviço de consumo de ERP depender de abstração - ERPService implementa ERPInterface  
 
 # Stack base
  - PHP 8.5

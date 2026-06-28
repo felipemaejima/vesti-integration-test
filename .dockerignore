@@ -1,0 +1,11 @@
+# Reinstalados/gerados dentro da imagem
+IntegrationService/vendor
+IntegrationService/node_modules
+IntegrationService/.env
+IntegrationService/storage/logs/*.log
+IntegrationService/bootstrap/cache/*.php
+
+# Controle de versão e lixo de SO
+.git
+**/.git
+**/.DS_Store

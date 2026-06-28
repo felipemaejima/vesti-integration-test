@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+    image: vesti-integration:latest
+    environment:
+      VESTI_API_URL: ${VESTI_API_URL:-integracao.meuvesti.com}
+      VESTI_COMPANY_ID: ${VESTI_COMPANY_ID:-}
+      VESTI_API_TOKEN: ${VESTI_API_TOKEN:-}
